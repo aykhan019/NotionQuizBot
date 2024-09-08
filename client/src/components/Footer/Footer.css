@@ -1,0 +1,11 @@
+footer{
+    background-color: #fff;
+    padding: 10px;
+    text-align: center;
+    --shadow: 0 0.1875em 0.4125em #0003, 0 0.125em 0.5em #0002;
+    box-shadow: var(--shadow);
+}
+
+footer a{
+    text-decoration: none;
+}
