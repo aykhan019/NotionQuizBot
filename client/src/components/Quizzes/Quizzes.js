@@ -29,7 +29,7 @@ export default function Quizzes() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            notion_token: '',
+            notion_token: '', // configure your Notion integration token
             top_page_ids: ['aaa8bb9510a14793aabd1c98d8fe8279', 'eb7b5acc92864c34a52bf602f52be333', '9a36fbf06f3c4019bc6bb3de86f1554a'],
             number_of_questions: 10
           })
