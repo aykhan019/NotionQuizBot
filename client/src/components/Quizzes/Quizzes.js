@@ -21,15 +21,17 @@ export default function Quizzes() {
     "Processing your request with AI...",
     "Compiling and organizing your quiz..."
   ];
-  
+
   useEffect(() => {
+    let isMounted = true; // Track if component is still mounted
+
     async function fetchQuizzes() {
       try {
         const response = await fetch('/generate-quiz', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            notion_token: '',
+            notion_token: ' ',
             top_page_ids: ['aaa8bb9510a14793aabd1c98d8fe8279', 'eb7b5acc92864c34a52bf602f52be333', '9a36fbf06f3c4019bc6bb3de86f1554a'],
             number_of_questions: 10
           })
@@ -40,31 +42,28 @@ export default function Quizzes() {
         }
 
         const data = await response.json();
-        const quiz = data.quiz.map(
-          q => new QuizData(q.question, q.answers, q.correct_answer)
-        );
+        if (isMounted) { // Only update state if still mounted
+          const quiz = data.quiz.map(
+            q => new QuizData(q.question, q.answers, q.correct_answer)
+          );
+          const shuffledQuestions = shuffleArray(quiz);
+          shuffledQuestions.forEach((question) => {
+            question.answers = shuffleArray(question.answers);
+          });
 
-        // Shuffle and set questions
-        const shuffledQuestions = shuffleArray(quiz)
-        shuffledQuestions.forEach((question) => {
-          question.answers = shuffleArray(question.answers);
-        });
-        
-        setData(shuffledQuestions);
-        setUserResponses(Array(shuffledQuestions.length).fill(null));
+          setData(shuffledQuestions);
+          setUserResponses(Array(shuffledQuestions.length).fill(null));
+        }
       } catch (error) {
         console.error('Error fetching quizzes:', error);
       }
     }
 
-    fetchQuizzes(); 
+    fetchQuizzes();
 
-    // Update loading text index periodically
-    const intervalId = setInterval(() => {
-      setLoadingTextIndex(prevIndex => (prevIndex + 1) % loadingTexts.length);
-    }, 5000); // Change text every 3 seconds
-
-    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+    return () => {
+      isMounted = false; // Cleanup flag on unmount
+    };
   }, []);
 
   function openFinishModal() {
