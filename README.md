@@ -9,6 +9,7 @@ This repository contains a web application that generates quizzes from Notion da
 - [Installation](#installation)
 - [Running the Application](#running-the-application)
 - [Features](#features)
+- [Running the Application](#running-the-application)
 - [License](#license)
 
 ## Introduction
@@ -109,6 +110,10 @@ npm start
 - Generates quizzes based on data from Notion using AI.
 - Interactive UI for answering quiz questions.
 - Score tracking with detailed result display.
+
+## Demo Video
+
+[Watch Demo Video](#)
 
 ## License
 
