@@ -31,11 +31,7 @@ export default function Quizzes() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-<<<<<<< HEAD
             notion_token: ' ',
-=======
-            notion_token: '', // configure your Notion integration token
->>>>>>> 16d0089808c05cfcf2128e3817120fa57a0b9fec
             top_page_ids: ['aaa8bb9510a14793aabd1c98d8fe8279', 'eb7b5acc92864c34a52bf602f52be333', '9a36fbf06f3c4019bc6bb3de86f1554a'],
             number_of_questions: 10
           })
@@ -50,6 +46,8 @@ export default function Quizzes() {
           const quiz = data.quiz.map(
             q => new QuizData(q.question, q.answers, q.correct_answer)
           );
+
+          console.log( data.quiz)
           const shuffledQuestions = shuffleArray(quiz);
           shuffledQuestions.forEach((question) => {
             question.answers = shuffleArray(question.answers);
@@ -96,6 +94,7 @@ export default function Quizzes() {
 
   function handleFinish() {
     const { score, results } = checkResults(userResponses, data);
+
     console.log("Quiz completed!");
     console.log(`Score: ${score}/${data.length}`);
     console.log("Results:", results);

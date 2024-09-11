@@ -69,7 +69,7 @@ class QuizGenerator:
         Generate a quiz in JSON format based on the following text. Include exactly {self.number_of_questions + err} questions. Each question should have a set of multiple-choice answers, with one correct answer. The JSON object should have a "quiz" key containing a list of question objects. Each question object should follow this structure:
         - "question": The question text.
         - "answers": A list of possible answers.
-        - "correct_answer": The index of the correct answer from the list of possible answers.
+        - "correct_answer": The correct answer from the list of possible answers.
 
         IMPORTANT: Return ONLY the JSON object. Do NOT include explanations, comments, or any other text before or after the JSON output.
 
@@ -95,7 +95,7 @@ class QuizGenerator:
                         "Option 3",
                         "Option 4"
                     ],
-                    "correct_answer": 0
+                    "correct_answer": "Option 1"
                 }},
                 {{
                     "question": "How does [concept or technique] differ from [another concept]?",
@@ -105,7 +105,7 @@ class QuizGenerator:
                         "Option C",
                         "Option D"
                     ],
-                    "correct_answer": 1
+                    "correct_answer": "Option 2"
                 }}
             ]
         }}
