@@ -116,7 +116,7 @@ npm start
 
 Check out the following video to see the Quiz Bot Web Application in action:
 
-[![Watch Demo Video](https://img.youtube.com/vi/T5DJ435Chzg/maxresdefault.jpg)](https://www.youtube.com/watch?v=T5DJ435Chzg&ab_channel=MyProjects)
+[![Watch Demo Video](https://img.youtube.com/vi/T5DJ435Chzg/hqdefault.jpg)](https://www.youtube.com/watch?v=T5DJ435Chzg&ab_channel=MyProjects)
 
 ## License
 
