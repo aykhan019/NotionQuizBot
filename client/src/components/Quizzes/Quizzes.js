@@ -47,7 +47,6 @@ export default function Quizzes() {
             q => new QuizData(q.question, q.answers, q.correct_answer)
           );
 
-          console.log( data.quiz)
           const shuffledQuestions = shuffleArray(quiz);
           shuffledQuestions.forEach((question) => {
             question.answers = shuffleArray(question.answers);
