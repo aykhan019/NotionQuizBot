@@ -122,4 +122,4 @@ Check out the following video to see the Quiz Bot Web Application in action:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE)
