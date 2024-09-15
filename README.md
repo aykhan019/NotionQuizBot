@@ -116,7 +116,7 @@ npm start
 
 Check out the following video to see the Quiz Bot Web Application in action:
 
-<a href="https://www.youtube.com/watch?v=T5DJ435Chzg&ab_channel=MyProjects">
+<a href="https://www.youtube.com/watch?v=T5DJ435Chzg">
   <img src="https://media.aykhan.net/thumbnails/projects/notion-quiz-bot.jpg" alt="Watch Demo Video" width="100%"/>
 </a>
 
