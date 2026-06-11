@@ -1,0 +1,22 @@
+# One-command local stack:  GEMINI_API_KEY=... docker compose up --build
+# Reads variables from a root .env file (see .env.example).
+services:
+  server:
+    build: ./flask-server
+    ports:
+      - "5000:5000"
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:?set GEMINI_API_KEY in .env}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.5-flash-lite}
+      NOTION_TOKEN: ${NOTION_TOKEN:-}
+      ALLOWED_ORIGINS: http://localhost:3000
+
+  client:
+    build:
+      context: ./client
+      args:
+        REACT_APP_API_BASE_URL: http://localhost:5000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server

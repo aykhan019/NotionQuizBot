@@ -1,0 +1,4 @@
+# Root-level secrets (used by docker-compose)
+.env
+
+.DS_Store
