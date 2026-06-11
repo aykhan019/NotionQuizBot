@@ -1,68 +1,81 @@
-import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Table, Button } from "semantic-ui-react";
+import { Table, Button, Statistic, Label, Header } from "semantic-ui-react";
 
-export default function QNA({ questionsAndAnswers }) {
-  // Calculate the count of correct answers and total questions
-  const correctAnswerCount = questionsAndAnswers.filter(
-    (item) => item.isCorrect
-  ).length;
-  const totalQuestions = questionsAndAnswers.length;
+// Review screen: score summary plus a per-question breakdown that includes the
+// explanation and topic, so a wrong answer becomes something you learn from.
+export default function QNA({ results, onRetryWrong, onRestart }) {
+  const correct = results.filter((r) => r.isCorrect).length;
+  const total = results.length;
+  const wrong = total - correct;
+  const percent = total ? Math.round((correct / total) * 100) : 0;
 
-  // Function to handle going back to the quiz page
-  const handleStartAgain = () => {
-    window.location.reload();
-  };
+  return (
+    <div className="qna-container">
+      <Header as="h2">Quiz results</Header>
 
-  return <div>
-  <h2>Quiz Results</h2>
-  <Table celled striped selectable size="large">
-    <Table.Header>
-      <Table.Row>
-        <Table.HeaderCell>No.</Table.HeaderCell>
-        <Table.HeaderCell>Questions</Table.HeaderCell>
-        <Table.HeaderCell>Your Answers</Table.HeaderCell>
-        <Table.HeaderCell>Correct Answers</Table.HeaderCell>
-        <Table.HeaderCell>Points</Table.HeaderCell>
-      </Table.Row>
-    </Table.Header>
-    <Table.Body>
-      {questionsAndAnswers.map((item, i) => (
-        <Table.Row key={i + 1}>
-          <Table.Cell>{i + 1}</Table.Cell>
-          <Table.Cell>{item.question}</Table.Cell>
-          <Table.Cell style={{ color: item.isCorrect ? "green" : "red" }}>
-            {item.userResponse}
-          </Table.Cell>
-          <Table.Cell>{item.correctAnswer}</Table.Cell>
-          <Table.Cell>{item.point}</Table.Cell>
-        </Table.Row>
-      ))}
-    </Table.Body>
-  </Table>
+      <Statistic.Group widths="three" size="small">
+        <Statistic>
+          <Statistic.Value>
+            {correct}/{total}
+          </Statistic.Value>
+          <Statistic.Label>Correct</Statistic.Label>
+        </Statistic>
+        <Statistic color={percent >= 50 ? "green" : "red"}>
+          <Statistic.Value>{percent}%</Statistic.Value>
+          <Statistic.Label>Score</Statistic.Label>
+        </Statistic>
+        <Statistic>
+          <Statistic.Value>{wrong}</Statistic.Value>
+          <Statistic.Label>To review</Statistic.Label>
+        </Statistic>
+      </Statistic.Group>
 
-  {/* Display additional statistics */}
-  <div style={{ marginTop: "20px" }}>
-    <h3>Quiz Statistics</h3>
-    <p>Total Questions: {totalQuestions}</p>
-    <p>Correct Answers: {correctAnswerCount}</p>
-    <p>Incorrect Answers: {totalQuestions - correctAnswerCount}</p>
-    <p>
-      Percentage Correct: {((correctAnswerCount / totalQuestions) * 100).toFixed(2)}%
-    </p>
-  </div>
+      <Table celled striped size="large" style={{ marginTop: 24 }}>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>#</Table.HeaderCell>
+            <Table.HeaderCell>Question</Table.HeaderCell>
+            <Table.HeaderCell>Your answer</Table.HeaderCell>
+            <Table.HeaderCell>Correct answer</Table.HeaderCell>
+            <Table.HeaderCell>Explanation</Table.HeaderCell>
+            <Table.HeaderCell>Topic</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {results.map((item, i) => (
+            <Table.Row key={i} positive={item.isCorrect} negative={!item.isCorrect}>
+              <Table.Cell>{i + 1}</Table.Cell>
+              <Table.Cell>{item.question}</Table.Cell>
+              <Table.Cell style={{ color: item.isCorrect ? "green" : "red" }}>
+                {item.userResponse}
+              </Table.Cell>
+              <Table.Cell>{item.correctAnswer}</Table.Cell>
+              <Table.Cell>{item.explanation}</Table.Cell>
+              <Table.Cell>
+                {item.topic && <Label size="small">{item.topic}</Label>}
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
 
-  {/* Start Again button */}
-  <Button
-    primary
-    onClick={handleStartAgain}
-    style={{ marginTop: "20px" }}
-  >
-    Start Again
-  </Button>
-</div>;
+      <div style={{ marginTop: 20 }}>
+        {wrong > 0 && (
+          <Button
+            color="orange"
+            icon="redo"
+            content={`Retry ${wrong} wrong ${wrong === 1 ? "one" : "ones"}`}
+            onClick={onRetryWrong}
+          />
+        )}
+        <Button primary icon="home" content="New quiz" onClick={onRestart} />
+      </div>
+    </div>
+  );
 }
 
 QNA.propTypes = {
-  questionsAndAnswers: PropTypes.array.isRequired,
+  results: PropTypes.array.isRequired,
+  onRetryWrong: PropTypes.func.isRequired,
+  onRestart: PropTypes.func.isRequired,
 };

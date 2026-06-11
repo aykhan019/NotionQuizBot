@@ -26,8 +26,11 @@ function checkResults(userResponses, data) {
 
     results.push({
       question: question.question,
+      answers: question.answers,
       userResponse: userResponse,
       correctAnswer: correctAnswer,
+      explanation: question.explanation,
+      topic: question.topic,
       isCorrect: isCorrect,
       point: isCorrect ? 1 : 0,
     });
