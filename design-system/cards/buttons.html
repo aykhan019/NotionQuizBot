@@ -1,0 +1,35 @@
+<!-- @dsCard group="Components" name="Buttons" width="900" height="320" -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../theme.css" />
+    <style>
+      .wrap { padding: 32px; display: flex; flex-direction: column; gap: 20px; }
+      .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+      .cap { width: 90px; font-size: 0.75rem; color: var(--text-muted); }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="row"><span class="cap">Primary</span>
+        <button class="btn btn-primary">Generate quiz</button>
+        <button class="btn btn-primary btn-lg">✨ Generate quiz</button>
+        <button class="btn btn-primary" disabled>Disabled</button>
+      </div>
+      <div class="row"><span class="cap">Secondary</span>
+        <button class="btn">Next →</button>
+        <button class="btn btn-ghost">Cancel</button>
+        <button class="btn btn-warning">↻ Retry wrong ones</button>
+      </div>
+      <div class="row"><span class="cap">Block</span>
+        <div style="flex:1;min-width:260px"><button class="btn btn-primary btn-lg btn-block">✨ Generate quiz</button></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!-- @dsCard group="Foundations" name="Typography" width="900" height="360" -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../theme.css" />
+    <style>
+      .wrap { padding: 32px; display: flex; flex-direction: column; gap: 14px; }
+      .row { display: flex; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+      .tag { width: 120px; flex: 0 0 auto; font-size: 0.75rem; color: var(--text-muted); font-family: ui-monospace, monospace; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="row"><span class="tag">Display / 800</span><span style="font-size:2.6rem;font-weight:800;letter-spacing:-0.02em">Teaches you</span></div>
+      <div class="row"><span class="tag">H2 / 800</span><span style="font-size:1.7rem;font-weight:800">Quiz results</span></div>
+      <div class="row"><span class="tag">H3 / 700</span><span style="font-size:1.3rem;font-weight:700">What does LIFO mean?</span></div>
+      <div class="row"><span class="tag">Body / 400</span><span style="font-size:1rem">A stack is a last-in, first-out structure.</span></div>
+      <div class="row"><span class="tag">Muted / 400</span><span class="muted">Paste text, upload a PDF, or pull from Notion.</span></div>
+      <div class="row"><span class="tag">Label / 600</span><span style="font-size:0.85rem;font-weight:600">Difficulty</span></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!-- @dsCard group="Foundations" name="Color tokens" width="900" height="360" -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../theme.css" />
+    <style>
+      .wrap { padding: 32px; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+      .sw { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; background: var(--surface); box-shadow: var(--shadow-sm); }
+      .sw .chip-color { height: 64px; }
+      .sw .meta { padding: 10px 12px; }
+      .sw .name { font-weight: 600; font-size: 0.85rem; }
+      .sw .val { font-size: 0.75rem; color: var(--text-muted); font-family: ui-monospace, monospace; }
+      h3 { margin: 0 0 14px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h3>Color</h3>
+      <div class="grid">
+        <div class="sw"><div class="chip-color" style="background:#6366f1"></div><div class="meta"><div class="name">Primary</div><div class="val">#6366F1</div></div></div>
+        <div class="sw"><div class="chip-color" style="background:#4f46e5"></div><div class="meta"><div class="name">Primary hover</div><div class="val">#4F46E5</div></div></div>
+        <div class="sw"><div class="chip-color" style="background:#eef0ff"></div><div class="meta"><div class="name">Primary soft</div><div class="val">#EEF0FF</div></div></div>
+        <div class="sw"><div class="chip-color" style="background:#16a34a"></div><div class="meta"><div class="name">Success</div><div class="val">#16A34A</div></div></div>
+        <div class="sw"><div class="chip-color" style="background:#dc2626"></div><div class="meta"><div class="name">Danger</div><div class="val">#DC2626</div></div></div>
+        <div class="sw"><div class="chip-color" style="background:#d97706"></div><div class="meta"><div class="name">Warning</div><div class="val">#D97706</div></div></div>
+        <div class="sw"><div class="chip-color" style="background:#1d1b2e"></div><div class="meta"><div class="name">Text</div><div class="val">#1D1B2E</div></div></div>
+        <div class="sw"><div class="chip-color" style="background:#6b6880"></div><div class="meta"><div class="name">Text muted</div><div class="val">#6B6880</div></div></div>
+        <div class="sw"><div class="chip-color" style="background:#f6f6fc;border-bottom:1px solid var(--border)"></div><div class="meta"><div class="name">Background</div><div class="val">#F6F6FC</div></div></div>
+        <div class="sw"><div class="chip-color" style="background:#e8e6f2"></div><div class="meta"><div class="name">Border</div><div class="val">#E8E6F2</div></div></div>
+      </div>
+    </div>
+  </body>
+</html>

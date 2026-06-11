@@ -1,0 +1,43 @@
+<!-- @dsCard group="Components" name="Tabs, chips & banners" width="900" height="420" -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../theme.css" />
+    <style>
+      .wrap { padding: 32px; display: flex; flex-direction: column; gap: 22px; }
+      .stack { display: flex; gap: 10px; flex-wrap: wrap; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="tabs">
+        <button class="tab" aria-selected="false">✎ Paste text</button>
+        <button class="tab" aria-selected="true">⬆ Upload PDF</button>
+        <button class="tab" aria-selected="false">◆ Notion</button>
+      </div>
+
+      <div class="stack">
+        <span class="chip">complexity</span>
+        <span class="chip">data structures</span>
+        <span class="chip">stacks</span>
+        <span class="eyebrow">Course material → practice quiz</span>
+      </div>
+
+      <div class="banner banner-success">
+        <div class="banner-title">✓ Correct</div>
+        <div>LIFO is the acronym for Last-In-First-Out, which describes how a stack operates.</div>
+      </div>
+
+      <div class="banner banner-danger">
+        <div class="banner-title">✕ Not quite</div>
+        <div>Correct answer: <strong>O(log n)</strong> — binary search halves the search space each step.</div>
+      </div>
+    </div>
+  </body>
+</html>

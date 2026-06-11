@@ -1,0 +1,40 @@
+<!-- @dsCard group="Patterns" name="Quiz option states" width="900" height="460" -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../theme.css" />
+    <style>
+      .wrap { padding: 32px; }
+      /* option styles mirrored from the app's Quizzes.css */
+      .options { display: flex; flex-direction: column; gap: 12px; max-width: 560px; }
+      .option { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; font: inherit; font-size: 1.02rem; color: var(--text); background: var(--surface-2); border: 1.5px solid var(--border-strong); border-radius: var(--radius); padding: 16px 18px; }
+      .option-letter { display: grid; place-items: center; width: 30px; height: 30px; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border-strong); border-radius: 9px; }
+      .option-text { flex: 1; }
+      .option-mark { font-weight: 800; font-size: 1.1rem; margin-left: auto; }
+      .option.selected { border-color: var(--primary); background: var(--primary-soft); }
+      .option.selected .option-letter { color:#fff; background: var(--primary); border-color: var(--primary); }
+      .option.correct { border-color: var(--success-border); background: var(--success-soft); color: var(--success); }
+      .option.correct .option-letter { color:#fff; background: var(--success); border-color: var(--success); }
+      .option.wrong { border-color: var(--danger-border); background: var(--danger-soft); color: var(--danger); }
+      .option.wrong .option-letter { color:#fff; background: var(--danger); border-color: var(--danger); }
+      .option.dim { opacity: 0.55; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="options">
+        <div class="option"><span class="option-letter">A.</span><span class="option-text">Default option</span></div>
+        <div class="option selected"><span class="option-letter">B.</span><span class="option-text">Selected (before reveal)</span></div>
+        <div class="option correct"><span class="option-letter">C.</span><span class="option-text">Correct answer</span><span class="option-mark">✓</span></div>
+        <div class="option wrong"><span class="option-letter">D.</span><span class="option-text">Chosen but wrong</span><span class="option-mark">✕</span></div>
+        <div class="option dim"><span class="option-letter">E.</span><span class="option-text">Dimmed after reveal</span></div>
+      </div>
+    </div>
+  </body>
+</html>

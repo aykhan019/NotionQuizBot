@@ -1,0 +1,37 @@
+<!-- @dsCard group="Patterns" name="Score ring & result card" width="900" height="420" -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../theme.css" />
+    <style>
+      .wrap { padding: 32px; display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+      .ring { width: 132px; height: 132px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--success) 252deg, var(--bg-tint) 0deg); }
+      .ring-inner { width: 104px; height: 104px; border-radius: 50%; background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); }
+      .pct { font-size: 1.8rem; font-weight: 800; }
+      .ratio { font-size: 0.85rem; font-weight: 600; }
+      .item { border-left: 4px solid var(--success); padding: 18px 20px; max-width: 460px; }
+      .ih { display:flex; gap:10px; align-items:flex-start; }
+      .flag { width:24px;height:24px;display:grid;place-items:center;border-radius:50%;font-size:0.8rem;font-weight:800;color:#fff;background:var(--success);flex:0 0 auto; }
+      .q { font-weight:600; line-height:1.4; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="ring"><div class="ring-inner"><span class="pct">70%</span><span class="ratio muted">7/10</span></div></div>
+      <div class="card item">
+        <div class="ih">
+          <span class="flag">✓</span>
+          <span class="q">1. Which data structure follows First-In-First-Out?</span>
+          <span class="chip" style="margin-left:auto">queues</span>
+        </div>
+        <p class="muted" style="margin:12px 0 0 34px;line-height:1.55">A queue removes the first element added — first-in, first-out.</p>
+      </div>
+    </div>
+  </body>
+</html>

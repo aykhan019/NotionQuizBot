@@ -1,0 +1,42 @@
+<!-- @dsCard group="Components" name="Inputs & controls" width="900" height="420" -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../theme.css" />
+    <style>
+      .wrap { padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+      .seg { display: flex; gap: 4px; padding: 5px; background: var(--surface-2); border: 1px solid var(--border-strong); border-radius: var(--radius-sm); }
+      .seg-item { flex: 1; border: none; background: transparent; font: inherit; font-weight: 600; color: var(--text-muted); padding: 10px 8px; border-radius: 9px; cursor: pointer; }
+      .seg-item.is-active { background: var(--surface); color: var(--primary-hover); box-shadow: var(--shadow-sm); }
+      .stepper { display: flex; gap: 6px; }
+      .stepper-btn { width: 46px; font-size: 1.3rem; font-weight: 600; color: var(--text-muted); background: var(--surface-2); border: 1px solid var(--border-strong); border-radius: var(--radius-sm); cursor: pointer; }
+      .stepper-input { width: 72px; text-align: center; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="field"><span class="label">Text input</span><input class="input" value="1a2b3c4d5e6f7a8b" /></div>
+      <div class="field"><span class="label">Difficulty (segmented)</span>
+        <div class="seg">
+          <button class="seg-item">Easy</button>
+          <button class="seg-item is-active">Medium</button>
+          <button class="seg-item">Hard</button>
+        </div>
+      </div>
+      <div class="field" style="grid-column:1 / -1"><span class="label">Textarea</span><textarea class="textarea" style="min-height:120px">Paste your lecture notes or course material here…</textarea></div>
+      <div class="field"><span class="label">Questions (stepper)</span>
+        <div class="stepper">
+          <button class="stepper-btn">−</button>
+          <input class="input stepper-input" value="10" />
+          <button class="stepper-btn">+</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
