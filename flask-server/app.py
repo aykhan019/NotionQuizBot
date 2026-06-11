@@ -147,5 +147,13 @@ def _handle_value(exc: ValueError):
     return jsonify({"error": str(exc)}), 400
 
 
+@app.errorhandler(RuntimeError)
+def _handle_runtime(exc: RuntimeError):
+    # e.g. a missing GEMINI_API_KEY surfaced from config.require_*(): a server
+    # misconfiguration, reported clearly instead of a bare 500 traceback.
+    logger.error("Server configuration error: %s", exc)
+    return jsonify({"error": str(exc)}), 500
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=config.PORT, debug=True)
