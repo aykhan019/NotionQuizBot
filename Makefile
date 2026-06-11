@@ -5,7 +5,8 @@ PY := $(SERVER)/venv/bin/python
 PIP := $(SERVER)/venv/bin/pip
 
 .DEFAULT_GOAL := help
-.PHONY: help setup setup-server setup-client server client test seed eval build lint docker-up docker-down
+DEV_PORT := 5055
+.PHONY: help setup setup-server setup-client server client dev test seed eval build lint docker-up docker-down
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -27,6 +28,14 @@ server: ## Run the Flask API (http://localhost:5000)
 
 client: ## Run the React dev server (http://localhost:3000)
 	cd $(CLIENT) && npm start
+
+dev: ## Run backend (port $(DEV_PORT)) + client together; Ctrl+C stops both
+	@echo "Backend → http://localhost:$(DEV_PORT)   Client → http://localhost:3000"
+	@echo "(client/.env must point REACT_APP_API_BASE_URL at port $(DEV_PORT))"
+	@trap 'kill 0' EXIT INT TERM; \
+		( cd $(SERVER) && PORT=$(DEV_PORT) venv/bin/python app.py ) & \
+		( cd $(CLIENT) && npm start ); \
+		wait
 
 test: ## Run the backend test suite
 	cd $(SERVER) && venv/bin/python -m pytest -q

@@ -1,10 +1,16 @@
-import React from 'react'
-import './Footer.css'
+import "./Footer.css";
 
 export default function Footer() {
   return (
-    <footer>
-        Copyright © Aykhan Ahmadzada 2024 - <a href='https://aykhan.net' target='blank'>aykhan.net</a>
+    <footer className="site-footer">
+      <div className="container container-wide footer-inner">
+        <span>
+          © {new Date().getFullYear()} Aykhan Ahmadzada
+        </span>
+        <a href="https://aykhan.net" target="_blank" rel="noreferrer">
+          aykhan.net
+        </a>
+      </div>
     </footer>
-  )
+  );
 }

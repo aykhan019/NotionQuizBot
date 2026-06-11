@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./Quizzes.css";
-import { Button, Item, Message, Divider, Menu, Label } from "semantic-ui-react";
 import getLetter from "../../utils/getLetter";
 import checkResults from "../../utils/checkResults";
 
@@ -16,6 +15,8 @@ export default function Quizzes({ questions, onComplete }) {
   const selected = userResponses[questionIndex];
   const revealed = selected !== null; // feedback shows once an answer is chosen
   const isLast = questionIndex === questions.length - 1;
+  const isCorrect = selected === current.correctAnswer;
+  const progress = ((questionIndex + (revealed ? 1 : 0)) / questions.length) * 100;
 
   function selectAnswer(answer) {
     if (revealed) return; // lock the choice once made
@@ -33,79 +34,75 @@ export default function Quizzes({ questions, onComplete }) {
     }
   }
 
-  function optionColor(option) {
-    if (!revealed) return undefined;
-    if (option === current.correctAnswer) return "green";
-    if (option === selected) return "red";
-    return undefined;
+  function optionState(option) {
+    if (!revealed) return selected === option ? "selected" : "";
+    if (option === current.correctAnswer) return "correct";
+    if (option === selected) return "wrong";
+    return "dim";
   }
 
   return (
-    <div className="quizzes-container">
-      <Item.Meta>
-        <Message size="huge" floating>
-          <b>
-            {questionIndex + 1}/{questions.length}. {current.question}
-          </b>
-        </Message>
-        <Item.Description>
-          <h3>Choose one answer:</h3>
-        </Item.Description>
-        <Divider />
-        <Menu vertical fluid size="massive">
+    <div className="quiz fade-up">
+      <div className="quiz-top">
+        <span className="muted quiz-counter">
+          Question {questionIndex + 1} of {questions.length}
+        </span>
+        {current.topic && <span className="chip">{current.topic}</span>}
+      </div>
+      <div className="progress">
+        <span className="progress-bar" style={{ width: `${progress}%` }} />
+      </div>
+
+      <div className="card card-pad quiz-card" key={questionIndex}>
+        <h2 className="quiz-question">{current.question}</h2>
+
+        <div className="options">
           {current.answers.map((option, i) => {
-            const color = optionColor(option);
+            const state = optionState(option);
             return (
-              <Menu.Item
+              <button
                 key={i}
-                active={selected === option}
-                color={color}
+                className={`option ${state}`}
                 onClick={() => selectAnswer(option)}
-                style={revealed ? { cursor: "default" } : undefined}
+                disabled={revealed}
               >
-                <b style={{ marginRight: "8px" }}>{getLetter(i)}</b>
-                {option}
-              </Menu.Item>
+                <span className="option-letter">{getLetter(i)}</span>
+                <span className="option-text">{option}</span>
+                {state === "correct" && <span className="option-mark">✓</span>}
+                {state === "wrong" && <span className="option-mark">✕</span>}
+              </button>
             );
           })}
-        </Menu>
-      </Item.Meta>
+        </div>
 
-      {revealed && (
-        <Message
-          positive={selected === current.correctAnswer}
-          negative={selected !== current.correctAnswer}
-        >
-          <Message.Header>
-            {selected === current.correctAnswer ? "Correct!" : "Not quite."}
-            {current.topic && (
-              <Label size="small" style={{ marginLeft: 10 }}>
-                {current.topic}
-              </Label>
+        {revealed && (
+          <div
+            className={`banner ${isCorrect ? "banner-success" : "banner-danger"} quiz-feedback`}
+          >
+            <div className="banner-title">
+              {isCorrect ? "✓ Correct" : "✕ Not quite"}
+            </div>
+            {!isCorrect && (
+              <p className="quiz-feedback-line">
+                Correct answer: <strong>{current.correctAnswer}</strong>
+              </p>
             )}
-          </Message.Header>
-          {selected !== current.correctAnswer && (
-            <p>
-              Correct answer: <b>{current.correctAnswer}</b>
-            </p>
-          )}
-          {current.explanation && <p>{current.explanation}</p>}
-        </Message>
-      )}
+            {current.explanation && (
+              <p className="quiz-feedback-line">{current.explanation}</p>
+            )}
+          </div>
+        )}
+      </div>
 
-      <Divider />
-      <Item.Extra>
-        <Button
-          primary
-          content={isLast ? "See results" : "Next"}
-          icon={isLast ? "check" : "right chevron"}
-          labelPosition="right"
-          floated="right"
-          size="big"
+      <div className="quiz-actions">
+        <button
+          className="btn btn-primary btn-lg"
           onClick={next}
           disabled={!revealed}
-        />
-      </Item.Extra>
+        >
+          {isLast ? "See results →" : "Next →"}
+        </button>
+      </div>
     </div>
   );
 }

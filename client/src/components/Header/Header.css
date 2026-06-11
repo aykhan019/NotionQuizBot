@@ -1,45 +1,53 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500&display=swap");
-
-
-:root {
-  --text-primary: hsl(180, 6%, 38%);
-  --space-05: 0.5rem;
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
 }
 
-a {
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand:hover {
   text-decoration: none;
 }
 
-.logo {
-  height: 45px;
-}
-
-.site-header {
-  display: flex;
-  justify-content: space-between;
-  --header-margin: 5vh;
-  --shadow: 0 0.1875em 0.3125em #0003, 0 0.125em 0.5em #0002;
-  min-block-size: var(--header);
-  background-color: #fff;
-  outline: 1px solid var(--border-clr);
-  box-shadow: var(--shadow);
-}
-
-.logo-text {
-  color: var(--text-primary);
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.header-content-left {
-  grid-auto-flow: column;
-  inline-size: max-content;
-  place-content: center;
-}
-
-.my-padding {
-  gap: var(--space-05);
-  padding: 0.7em 0.75em;
-  align-items: center;
+.brand-mark {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  color: #fff;
+  background: linear-gradient(135deg, #7c79ff, var(--primary));
+  box-shadow: 0 8px 18px -8px rgba(99, 102, 241, 0.8);
+}
+
+.brand-name {
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.header-by {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.header-by:hover {
+  color: var(--primary-hover);
+  text-decoration: none;
 }

@@ -1,38 +1,147 @@
-.quizzes-container {
-    padding: 40px;
+.quiz {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-#loading-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+.quiz-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.quiz-counter {
+  font-size: 0.88rem;
+  font-weight: 600;
 }
 
-#spinner {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
+.progress {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-tint);
+  overflow: hidden;
+}
+.progress-bar {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--primary), #a855f7);
+  transition: width 0.4s var(--ease);
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+.quiz-card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  animation: fade-up 0.3s var(--ease) both;
+}
+.quiz-question {
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.3;
 }
 
-#loading-text {
-    margin-top: 20px;
-    font-size: 1.4rem;
-    color: #333;
-    /* Adjust text color if needed */
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: 1.02rem;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease), background 0.15s var(--ease),
+    transform 0.12s var(--ease), box-shadow 0.15s var(--ease);
+}
+.option:not(:disabled):hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+}
+.option:disabled {
+  cursor: default;
+}
+.option-letter {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+}
+.option-text {
+  flex: 1;
+}
+.option-mark {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.option.selected {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+.option.selected .option-letter {
+  color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.option.correct {
+  border-color: var(--success-border);
+  background: var(--success-soft);
+  color: var(--success);
+}
+.option.correct .option-letter {
+  color: #fff;
+  background: var(--success);
+  border-color: var(--success);
+}
+.option.correct .option-mark {
+  color: var(--success);
+  margin-left: auto;
+}
+.option.wrong {
+  border-color: var(--danger-border);
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+.option.wrong .option-letter {
+  color: #fff;
+  background: var(--danger);
+  border-color: var(--danger);
+}
+.option.wrong .option-mark {
+  color: var(--danger);
+  margin-left: auto;
+}
+.option.dim {
+  opacity: 0.55;
+}
+
+.quiz-feedback {
+  animation: fade-up 0.25s var(--ease) both;
+}
+.quiz-feedback-line {
+  margin: 4px 0 0;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.quiz-actions {
+  display: flex;
+  justify-content: flex-end;
 }

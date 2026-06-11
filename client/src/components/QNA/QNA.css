@@ -1,0 +1,146 @@
+.qna {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Summary */
+.qna-score {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.qna-ring {
+  flex: 0 0 auto;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.qna-ring-inner {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+.qna-percent {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.qna-ratio {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.qna-head {
+  flex: 1;
+  min-width: 220px;
+}
+.qna-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.qna-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* Result list */
+.qna-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.qna-item {
+  padding: 18px 20px;
+  border-left: 4px solid var(--border-strong);
+}
+.qna-item.is-correct {
+  border-left-color: var(--success);
+}
+.qna-item.is-wrong {
+  border-left-color: var(--danger);
+}
+.qna-item-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.qna-flag {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #fff;
+}
+.qna-flag.ok {
+  background: var(--success);
+}
+.qna-flag.no {
+  background: var(--danger);
+}
+.qna-q {
+  flex: 1;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.qna-topic {
+  flex: 0 0 auto;
+}
+
+.qna-answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 0 34px;
+}
+.qna-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.qna-answer-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.qna-answer-val {
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+}
+.qna-answer-val.ok {
+  color: var(--success);
+  background: var(--success-soft);
+}
+.qna-answer-val.wrong {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+.qna-explain {
+  margin: 14px 0 0 34px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+@media (max-width: 540px) {
+  .qna-answers,
+  .qna-explain {
+    margin-left: 0;
+  }
+}

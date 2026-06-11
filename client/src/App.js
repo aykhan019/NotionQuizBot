@@ -1,7 +1,6 @@
 import { useState } from "react";
+import "./styles/theme.css";
 import "./App.css";
-import "semantic-ui-css/semantic.min.css";
-import { Container, Message } from "semantic-ui-react";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Setup from "./components/Setup/Setup";
@@ -78,12 +77,17 @@ export default function App() {
     setPhase(PHASE.SETUP);
   }
 
+  const wide = phase === PHASE.REVIEW;
+
   return (
     <div className="app-container">
       <Header />
-      <Container className="main-content">
+      <main className={`main-content container${wide ? " container-wide" : ""}`}>
         {error && phase === PHASE.SETUP && (
-          <Message negative header="Couldn't generate a quiz" content={error} />
+          <div className="banner banner-danger fade-up" style={{ marginBottom: 20 }}>
+            <div className="banner-title">Couldn't generate a quiz</div>
+            <div>{error}</div>
+          </div>
         )}
 
         {phase === PHASE.SETUP && <Setup onGenerate={handleGenerate} />}
@@ -98,7 +102,7 @@ export default function App() {
             onRestart={handleRestart}
           />
         )}
-      </Container>
+      </main>
       <Footer />
     </div>
   );
