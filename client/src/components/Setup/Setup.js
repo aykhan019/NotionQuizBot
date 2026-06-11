@@ -101,7 +101,7 @@ export default function Setup({ onGenerate }) {
           <Form>
             <Input
               fluid
-              placeholder="aaa8bb9510a14793aabd1c98d8fe8279, eb7b5acc..."
+              placeholder="e.g. 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d"
               value={notionIds}
               onChange={(e) => setNotionIds(e.target.value)}
             />
