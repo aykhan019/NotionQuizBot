@@ -8,6 +8,10 @@ python-dotenv==1.0.1
 requests==2.32.3
 jsonschema==4.23.0
 
+# Database (SQLite for local/dev + CI, Postgres/Neon in production)
+SQLAlchemy==2.0.32
+psycopg[binary]==3.1.18
+
 # Content sources
 PyMuPDF==1.24.10          # PDF -> text extraction
 notion-client==2.2.1      # Notion API (official client; subpage + block reading)

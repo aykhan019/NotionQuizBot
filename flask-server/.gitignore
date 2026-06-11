@@ -10,3 +10,6 @@ __pycache__/
 
 # Generated demo artifacts
 quiz_output.json
+
+# Local SQLite database
+*.db

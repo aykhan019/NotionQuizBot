@@ -24,6 +24,19 @@ def _float(name: str, default: float) -> float:
         return default
 
 
+def _normalize_db_url(url: str) -> str:
+    """Let users paste a plain Neon/Postgres URL; use the psycopg driver.
+
+    Neon hands out `postgresql://...` (or sometimes `postgres://...`). SQLAlchemy
+    needs the driver spelled out, so we upgrade it to `postgresql+psycopg://`.
+    """
+    if url.startswith("postgres://"):
+        url = "postgresql://" + url[len("postgres://") :]
+    if url.startswith("postgresql://"):
+        url = "postgresql+psycopg://" + url[len("postgresql://") :]
+    return url
+
+
 class Config:
     # LLM
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
@@ -33,6 +46,11 @@ class Config:
 
     # Notion (optional source)
     NOTION_TOKEN = os.getenv("NOTION_TOKEN", "").strip()
+
+    # Database — SQLite file by default; a Postgres/Neon URL in production.
+    DATABASE_URL = _normalize_db_url(
+        os.getenv("DATABASE_URL", "").strip() or "sqlite:///./quizbot.db"
+    )
 
     # HTTP / CORS
     ALLOWED_ORIGINS = [

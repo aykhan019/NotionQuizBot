@@ -18,12 +18,18 @@ from providers import LLMError
 from quiz.generator import DIFFICULTIES, QuizGenerator
 from quiz.schema import QuizValidationError
 from sources.pdf import PDFParseError, extract_text_from_pdf
+from study_routes import study
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("quizbot")
 
 app = Flask(__name__)
-CORS(app, origins=config.ALLOWED_ORIGINS)
+CORS(
+    app,
+    origins=config.ALLOWED_ORIGINS,
+    allow_headers=["Content-Type", "X-Client-Id"],
+)
+app.register_blueprint(study)
 
 # 10 MB cap on uploads — generous for lecture PDFs, a guard against abuse.
 app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
