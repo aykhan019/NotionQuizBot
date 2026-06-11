@@ -5,7 +5,7 @@ import checkResults from "../../utils/checkResults";
 
 // Runs through the questions one at a time, revealing whether each answer was
 // right (with its explanation) immediately after it's picked.
-export default function Quizzes({ questions, onComplete }) {
+export default function Quizzes({ questions, onComplete, onAnswered, title }) {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [userResponses, setUserResponses] = useState(
     Array(questions.length).fill(null)
@@ -23,6 +23,8 @@ export default function Quizzes({ questions, onComplete }) {
     const updated = [...userResponses];
     updated[questionIndex] = answer;
     setUserResponses(updated);
+    // Notify once, when the answer is first chosen (used by review mode).
+    if (onAnswered) onAnswered(current, answer === current.correctAnswer);
   }
 
   function next() {
@@ -45,7 +47,7 @@ export default function Quizzes({ questions, onComplete }) {
     <div className="quiz fade-up">
       <div className="quiz-top">
         <span className="muted quiz-counter">
-          Question {questionIndex + 1} of {questions.length}
+          {title ? `${title} · ` : ""}Question {questionIndex + 1} of {questions.length}
         </span>
         {current.topic && <span className="chip">{current.topic}</span>}
       </div>

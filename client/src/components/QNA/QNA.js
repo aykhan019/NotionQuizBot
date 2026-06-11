@@ -1,16 +1,38 @@
+import { useState } from "react";
 import "./QNA.css";
 
 // Review screen: score summary plus a per-question breakdown that includes the
 // explanation and topic, so a wrong answer becomes something you learn from.
-export default function QNA({ results, onRetryWrong, onRestart }) {
+export default function QNA({ results, onRetryWrong, onRestart, shareUrl }) {
   const correct = results.filter((r) => r.isCorrect).length;
   const total = results.length;
   const wrong = total - correct;
   const percent = total ? Math.round((correct / total) * 100) : 0;
   const passed = percent >= 50;
+  const [copied, setCopied] = useState(false);
+
+  function copyShare() {
+    if (!shareUrl) return;
+    navigator.clipboard?.writeText(shareUrl).then(
+      () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1800);
+      },
+      () => {}
+    );
+  }
 
   return (
     <div className="qna fade-up">
+      {shareUrl && (
+        <div className="card qna-share">
+          <span className="qna-share-label">🔗 Share this quiz</span>
+          <input className="input qna-share-url" readOnly value={shareUrl} />
+          <button className="btn btn-primary" onClick={copyShare}>
+            {copied ? "Copied!" : "Copy link"}
+          </button>
+        </div>
+      )}
       <div className="card card-pad qna-summary">
         <div className="qna-score">
           <div

@@ -4,6 +4,24 @@
   gap: 18px;
 }
 
+.qna-share {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  flex-wrap: wrap;
+}
+.qna-share-label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+.qna-share-url {
+  flex: 1;
+  min-width: 180px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
 /* Summary */
 .qna-score {
   display: flex;

@@ -1,0 +1,58 @@
+.appnav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+.appnav-inner {
+  display: inline-flex;
+  gap: 4px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+}
+.appnav-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: color 0.15s var(--ease), background 0.15s var(--ease);
+}
+.appnav-item:hover {
+  color: var(--text);
+}
+.appnav-item.is-active {
+  color: #fff;
+  background: linear-gradient(135deg, #7c79ff, var(--primary));
+  box-shadow: 0 8px 18px -10px rgba(99, 102, 241, 0.8);
+}
+.appnav-badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--danger);
+  border-radius: var(--radius-pill);
+}
+.appnav-item.is-active .appnav-badge {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 480px) {
+  .appnav-item {
+    padding: 10px 14px;
+  }
+}

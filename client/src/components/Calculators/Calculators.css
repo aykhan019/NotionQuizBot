@@ -1,0 +1,127 @@
+.calculators {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.calc-hero {
+  text-align: center;
+  margin-bottom: 6px;
+}
+.calc-h1 {
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-weight: 800;
+  margin: 12px 0 8px;
+}
+
+.calc-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.calc-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.calc-sub {
+  margin: 0 0 14px;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.calc-result {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.calc-result.calc-ok {
+  color: var(--success);
+  background: var(--success-soft);
+  border-color: var(--success-border);
+}
+.calc-result.calc-no {
+  color: var(--danger);
+  background: var(--danger-soft);
+  border-color: var(--danger-border);
+}
+
+/* GPA */
+.gpa-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.gpa-row {
+  display: grid;
+  grid-template-columns: 1fr 110px 110px 36px;
+  gap: 10px;
+  align-items: center;
+}
+.gpa-head {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+.gpa-remove {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.gpa-remove:hover {
+  color: var(--danger);
+  border-color: var(--danger-border);
+  background: var(--danger-soft);
+}
+.gpa-add {
+  align-self: flex-start;
+  margin-top: 12px;
+}
+.gpa-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.gpa-result > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.gpa-result .muted {
+  font-size: 0.8rem;
+}
+.gpa-result strong {
+  font-size: 1.3rem;
+}
+.gpa-big strong {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary-hover);
+}
+
+@media (max-width: 540px) {
+  .calc-grid {
+    grid-template-columns: 1fr;
+  }
+  .gpa-head {
+    display: none;
+  }
+  .gpa-row {
+    grid-template-columns: 1fr 80px 90px 36px;
+  }
+}
