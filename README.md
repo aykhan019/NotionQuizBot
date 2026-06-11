@@ -36,12 +36,16 @@ does:
 
 A student drops in the material for a course (notes, a lecture PDF) and gets a
 focused set of practice questions, each with an explanation and a topic tag they
-can revise from. It's deliberately small and practical, supports any course's
-material rather than one hardcoded source, and is built to be *used*: a fresh
-clone runs in minutes and the demo works with no account or external data.
+can revise from. Then the app keeps them coming back: a **progress dashboard**
+showing per-topic mastery, **spaced review** of missed questions, and the same
+kind of **grade & GPA calculators** Unicourse already ships — turning a one-shot
+generator into a study companion that *gets used*.
 
-Notion is kept as one supported input — not the only one — to show real
-external-API integration without tying the tool to a single person's notes.
+It's deliberately small and practical, supports any course's material rather
+than one hardcoded source, and runs from a fresh clone in minutes with the demo
+working on no account or external data. Notion is kept as one supported input —
+not the only one — to show real external-API integration without tying the tool
+to a single person's notes.
 
 ## How it works
 
@@ -76,14 +80,25 @@ Notion page IDs) and gets back a quiz.
 
 ## Features
 
+**Generate**
 - **Three input sources** — paste text, upload a PDF, or read from Notion.
 - **Study-useful questions** — each carries an explanation and a topic tag.
 - **Difficulty + count controls** — easy / medium / hard, 1–20 questions.
+- **Server-side validation** — strict JSON schema, retry-once, de-duplication.
+- **Swappable LLM** — Gemini today, behind a one-file provider interface.
+
+**Practice**
 - **Immediate per-question feedback** — right/wrong, the correct answer, and why.
 - **Review screen** — full breakdown with explanations and topics.
 - **Retry wrong ones only** — drill the questions you missed.
-- **Server-side validation** — strict JSON schema, retry-once, de-duplication.
-- **Swappable LLM** — Gemini today, behind a one-file provider interface.
+
+**Stick with it** (database-backed)
+- **Progress dashboard** — per-topic mastery (weakest first) and quiz history.
+- **Spaced review** — missed questions are queued and resurfaced on a schedule.
+- **Grade & GPA calculators** — "what do I need on the final?" and a GPA tool.
+- **Shareable quizzes** — every quiz gets a link; classmates open the same one.
+
+> No login: history and review are scoped to an anonymous per-browser id.
 
 ## Quickstart (under 5 minutes)
 
@@ -166,6 +181,7 @@ All configuration is environment-based. See
 | `GEMINI_MODEL` | server | Model id (default `gemini-2.5-flash-lite`) |
 | `LLM_TEMPERATURE` | server | Generation temperature (default `0.4`) |
 | `NOTION_TOKEN` | server | Optional; only for the Notion source |
+| `DATABASE_URL` | server | Postgres/Neon URL; unset = local SQLite file |
 | `ALLOWED_ORIGINS` | server | Comma-separated CORS allow-list |
 | `MAX_QUESTIONS` / `MAX_CONTENT_CHARS` | server | Safety limits |
 | `REACT_APP_API_BASE_URL` | client | Backend URL (blank in dev → CRA proxy) |
@@ -176,17 +192,19 @@ All configuration is environment-based. See
 NotionQuizBot/
 ├── client/                 React front-end
 │   └── src/
-│       ├── api/quiz.js      single place that calls the backend
-│       ├── components/      Setup, Quizzes, QNA (review), Loading, Header, Footer
+│       ├── api/             quiz.js + study.js (backend calls)
+│       ├── components/      Setup, Quizzes, QNA, Progress, Calculators, Nav, …
 │       └── classes/, utils/
 ├── flask-server/           Flask API
-│   ├── app.py               routes, CORS, error handling
+│   ├── app.py               quiz routes, CORS, error handling
+│   ├── study_routes.py      history / mastery / review / share endpoints
+│   ├── db.py, store.py      SQLAlchemy data layer (SQLite dev / Neon prod)
 │   ├── config.py            env-based config (no hardcoded secrets)
 │   ├── providers/           LLM provider interface + Gemini implementation
 │   ├── quiz/                prompt building, schema, validation, de-dup
 │   ├── sources/             pdf.py (PyMuPDF), notion.py (notion-client)
 │   ├── scripts/             seed.py (demo), eval_quiz.py (quality gate)
-│   └── tests/               schema, PDF, and API tests
+│   └── tests/               schema, PDF, API, and study tests (20)
 ├── sample/                 generic study material (.md + .pdf) for a no-setup demo
 ├── docker-compose.yml      one-command local stack
 ├── Makefile                common tasks

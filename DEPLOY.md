@@ -32,6 +32,7 @@ plain Python service with the commands below.
 | `LLM_TEMPERATURE` | – | Defaults to `0.4` |
 | `LLM_MAX_RETRIES` | – | Defaults to `1` |
 | `NOTION_TOKEN` | – | Only for the Notion source |
+| `DATABASE_URL` | ✅ | Neon Postgres connection string (see step 1a). If unset, falls back to a local SQLite file — fine for a demo, but it won't persist on most platforms. |
 | `ALLOWED_ORIGINS` | ✅ | Your frontend URL, e.g. `https://your-app.vercel.app` |
 | `MAX_QUESTIONS` | – | Defaults to `20` |
 | `MAX_CONTENT_CHARS` | – | Defaults to `24000` |
@@ -39,6 +40,20 @@ plain Python service with the commands below.
 > `PORT` is provided by the platform; the start command above reads `$PORT`.
 
 After it deploys, note the backend URL, e.g. `https://notionquizbot.onrender.com`.
+
+### 1a. Database → Neon (free Postgres)
+
+History, topic mastery, the spaced-review queue, and shareable quizzes are
+stored in Postgres. [Neon](https://neon.tech) gives a free, serverless Postgres:
+
+1. Create a Neon project; copy the connection string (looks like
+   `postgresql://user:pass@ep-xxxx.region.aws.neon.tech/dbname?sslmode=require`).
+2. Set it as `DATABASE_URL` on the backend. You can paste Neon's string as-is —
+   the app upgrades `postgresql://` to the `postgresql+psycopg://` driver and
+   creates its tables automatically on first boot.
+
+> Locally you don't need Neon at all: leave `DATABASE_URL` unset and the app uses
+> a SQLite file (`quizbot.db`).
 
 Railway is equivalent: point it at `flask-server`, set the same env vars, and
 use the same Gunicorn start command (or the Dockerfile).
